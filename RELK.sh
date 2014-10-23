@@ -196,6 +196,8 @@ sudo apt-get -y install oracle-java7-installer
 echo "deb http://packages.elasticsearch.org/logstash/1.4/debian stable main" | sudo tee /etc/apt/sources.list.d/logstash.list
 sudo apt-get update
 sudo apt-get install logstash=1.4.2-1-2c0f5a1
+
+Bug: In Ubuntu you may have to edit the LS_GROUP=logstash to LS_GROUP=adm in the logstash Init script - known bug
 '
 
 # Redirect output to Redis at this server:
