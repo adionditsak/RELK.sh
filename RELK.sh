@@ -1,7 +1,9 @@
 #/bin/bash
+
 ##########################################################
 ### INTRODUCTION
 ##########################################################
+
 : '
 Install and configure R (Redis) + ELK server from scratch on CentOS 6.5.
 * Logstash version 1.4.2
@@ -11,10 +13,10 @@ Install and configure R (Redis) + ELK server from scratch on CentOS 6.5.
 - You may have to change the Kibana elasticsearch parameter to the actual URL with your internal IP to connect probably to the interface.
 '
 
-
 ##########################################################
 ### MAIN
 ##########################################################
+
 main() {
 dependencies
 elasticsearch
@@ -23,9 +25,11 @@ kibana
 redis
 start_and_chkconfig
 }
+
 ##########################################################
 ### DEPENDENCIES
 ##########################################################
+
 dependencies() {
 echo ""
 echo "Dependencies"
@@ -34,9 +38,11 @@ wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 sudo rpm -Uvh epel-release-6*.rpm
 yum -y install java-1.7.0-openjdk httpd redis
 }
+
 ##########################################################
 ### ELASTICSEARCH
 ##########################################################
+
 elasticsearch() {
 echo ""
 echo "Elasticsearch"
@@ -54,9 +60,11 @@ sed -i '/discovery.zen.ping.multicast.enabled/c\discovery.zen.ping.multicast.ena
 sed -i '/cluster.name/c\cluster.name: elasticsearch' /etc/elasticsearch/elasticsearch.yml
 chown -R elasticsearch:elasticsearch /var/lib/elasticsearch/ /var/log/elasticsearch/
 }
+
 ##########################################################
 ### LOGSTASH
 ##########################################################
+
 logstash() {
 echo ""
 echo "Logstash"
@@ -91,9 +99,11 @@ stdout { codec => rubydebug }
 EOF
 chown -R logstash:logstash /var/lib/logstash/ /var/log/logstash/
 }
+
 ##########################################################
 ### KIBANA
 ##########################################################
+
 kibana() {
 echo ""
 echo "Kibana"
@@ -104,9 +114,11 @@ tar -xzvf kibana-4.0.0-linux-x64.tar.gz
 cd kibana-4.0.0-linux-x64
 mv * ..; cd ..; ls
 }
+
 ##########################################################
 ### REDIS
 ##########################################################
+
 redis() {
 echo ""
 echo "Redis"
@@ -116,9 +128,11 @@ mkdir -p /var/log/redis
 touch /var/log/redis/redis.log
 chown -R redis:redis /var/log/redis/
 }
+
 ##########################################################
 ### START SERVICES + CHKCONFIG ON
 ##########################################################
+
 start_and_chkconfig() {
 echo ""
 echo "Starting services + chkconfig"
@@ -136,10 +150,13 @@ chkconfig httpd on
 ##########################################################
 ### INIT
 ##########################################################
+
 main
+
 ##########################################################
 ### AGENTS GUIDE
 ##########################################################
+
 # Install logstash agents on your agent servers:
 : '
 Redhat-based:
